@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Header, ProjectGrid } from "@/components/site-client";
-import { projects, sources, timeline } from "@/data/content";
+import { artworks, exhibitionHighlights, projects, sources, timeline } from "@/data/content";
 
 export default function Home() {
   return (
@@ -27,26 +27,31 @@ export default function Home() {
       <section className="works section-pad" id="oeuvres">
         <div className="section-heading">
           <p className="section-index">01 — Œuvres</p>
-          <h2>Quelques<br />images</h2>
+          <h2>Images<br /><i>en circulation</i></h2>
         </div>
-        <div className="works-grid">
-          <figure className="work-large">
-            <Image src="https://ddabretagne.org/media/pages/artistes/jean-philippe-lemee/oeuvres/2017/39c79b1474-1647358020/sav1-1200x900-q80.jpg" alt="Œuvre de Jean-Philippe Lemée présentée dans la sélection 2017" width={1200} height={900} unoptimized />
-            <figcaption><span>Sélection 2017</span><a href="https://ddabretagne.org/fr/artistes/jean-philippe-lemee/oeuvres/2017" target="_blank" rel="noreferrer">DDAB Bretagne · © droits réservés ↗</a></figcaption>
-          </figure>
-          <figure>
-            <Image src="https://ddabretagne.org/media/pages/artistes/jean-philippe-lemee/oeuvres/2009/croisades/26017a88ca-1647358069/croisade2-675x675-q80.jpg" alt="Œuvre de la série Croisades de Jean-Philippe Lemée" width={675} height={675} unoptimized />
-            <figcaption><span>Croisades, 2009</span><a href="https://ddabretagne.org/fr/artistes/jean-philippe-lemee/oeuvres/2009" target="_blank" rel="noreferrer">DDAB Bretagne ↗</a></figcaption>
-          </figure>
-          <figure>
-            <Image src="https://ddabretagne.org/media/pages/artistes/jean-philippe-lemee/oeuvres/2008/archanges-bleus/0e943868eb-1647358078/archangebleu3-675x675-q80.jpg" alt="Œuvre de la série Archanges bleus de Jean-Philippe Lemée" width={675} height={675} unoptimized />
-            <figcaption><span>Archanges bleus, 2008</span><a href="https://ddabretagne.org/fr/artistes/jean-philippe-lemee/oeuvres/2008" target="_blank" rel="noreferrer">DDAB Bretagne ↗</a></figcaption>
-          </figure>
+        <div className="artwork-wall">
+          {artworks.map((artwork, index) => (
+            <figure className={`artwork artwork-${artwork.format} artwork-${index + 1}`} key={`${artwork.title}-${index}`}>
+              <a href={artwork.href} target="_blank" rel="noreferrer">
+                <Image src={artwork.image} alt={`${artwork.title}, œuvre de Jean-Philippe Lemée, ${artwork.year}`} width={1200} height={900} unoptimized />
+              </a>
+              <figcaption><span>{artwork.title}</span><span>{artwork.year}</span><span>DDAB Bretagne · © droits réservés ↗</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section className="statement section-pad">
+        <p className="section-index">02 — Une position</p>
+        <p className="statement-lead">Ni peintre solitaire, ni simple collectionneur d’images : <strong>un metteur en scène de tableaux.</strong></p>
+        <div className="statement-columns">
+          <p>Depuis 1989, chaque toile naît d’une recette. L’image source est regardée, redessinée, transmise, agrandie, colorée puis réalisée par un peintre en lettres. L’auteur se déplace : il devient celui qui règle les conditions d’apparition de l’œuvre.</p>
+          <p>Références savantes et culture ordinaire se rencontrent sans hiérarchie : Fra Angelico, Courbet ou Warhol peuvent côtoyer le football, les jeux de société, les objets du quotidien et les dessins anonymes.</p>
         </div>
       </section>
 
       <section className="projects section-pad" id="projets">
-        <div className="section-heading"><p className="section-index">02 — Projets</p><h2>Une œuvre<br /><i>en mouvement</i></h2></div>
+        <div className="section-heading"><p className="section-index">03 — Projets</p><h2>Une œuvre<br /><i>en mouvement</i></h2></div>
         <ProjectGrid projects={projects} />
       </section>
 
@@ -76,6 +81,14 @@ export default function Home() {
         <div className="timeline-list">
           {timeline.map(([year, text]) => <div className="timeline-row" key={year}><strong>{year}</strong><p>{text}</p></div>)}
         </div>
+      </section>
+
+      <section className="exhibitions section-pad">
+        <div className="section-heading light"><p className="section-index">05 — Expositions choisies</p><h2>Dans les lieux<br />et les collections</h2></div>
+        <div className="exhibition-grid">
+          {exhibitionHighlights.map(([year, title]) => <article key={`${year}-${title}`}><span>{year}</span><p>{title}</p></article>)}
+        </div>
+        <p className="exhibition-note">Sélection établie d’après la biographie et bibliographie publiée par Documents d’artistes Bretagne.</p>
       </section>
 
       <section className="sources section-pad" id="sources">
