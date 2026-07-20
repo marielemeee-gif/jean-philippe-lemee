@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import type { Project } from "@/data/content";
 
 const filters = [
@@ -30,14 +31,15 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
       </div>
       <div className="project-grid">
         {visible.map((project) => (
-          <article className={`project-card tone-${project.tone}`} id={project.id} key={project.id}>
+          <Link className={`project-card tone-${project.tone}`} href={`/projets#${project.id}`} id={project.id} key={project.id}>
             <div className="card-top"><span>{project.number}</span><span>{project.subtitle}</span></div>
             <div className="project-mark" aria-hidden="true">{project.mark}</div>
             <div>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
+              <span className="card-link">Ouvrir le dossier →</span>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </>
@@ -54,7 +56,7 @@ export function Header() {
 
   return (
     <header className="site-header">
-      <a className="brand" href="#accueil" aria-label="Retour à l’accueil"><span>JP</span>Lemée</a>
+      <Link className="brand" href="/" aria-label="Retour à l’accueil"><span>JP</span>Lemée</Link>
       <button
         className="menu-button"
         type="button"
@@ -66,12 +68,12 @@ export function Header() {
         <i /><i />
       </button>
       <nav id="navigation-principale" className={open ? "open" : ""} aria-label="Navigation principale">
-        <a href="#oeuvres">Œuvres</a>
-        <a href="#projets">Projets</a>
-        <a href="#methode">Méthode</a>
-        <a href="#parcours">Parcours</a>
-        <a href="#sources">Archives</a>
+        <Link href="/#oeuvres">Œuvres</Link>
+        <Link href="/projets">Projets</Link>
+        <Link href="/archives#parcours">Parcours</Link>
+        <Link href="/archives">Archives</Link>
       </nav>
+      <button className="back-to-top" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Retour en haut">↑</button>
     </header>
   );
 }

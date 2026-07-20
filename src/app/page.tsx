@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Header, ProjectGrid } from "@/components/site-client";
-import { artworks, exhibitionHighlights, projects, sources, timeline } from "@/data/content";
+import { artworks, projects } from "@/data/content";
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
         <h1><span>Jean-Philippe</span><strong>Lemée</strong></h1>
         <div className="hero-bottom">
           <p>Regarder autrement.<br />Faire circuler les images.<br />Transformer le public en complice.</p>
-          <a className="round-link" href="#projets" aria-label="Découvrir les projets">↓</a>
+          <a className="round-link" href="#oeuvres" aria-label="Découvrir les œuvres">↓</a>
         </div>
         <div className="hero-shape shape-one" /><div className="hero-shape shape-two" />
       </section>
@@ -24,79 +25,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="works section-pad" id="oeuvres">
+      <section className="works works-compact section-pad" id="oeuvres">
         <div className="section-heading">
-          <p className="section-index">01 — Œuvres</p>
-          <h2>Images<br /><i>en circulation</i></h2>
+          <p className="section-index">01 — Sélection</p>
+          <h2>Voir<br /><i>les œuvres</i></h2>
         </div>
-        <div className="artwork-wall">
-          {artworks.map((artwork, index) => (
-            <figure className={`artwork artwork-${artwork.format} artwork-${index + 1}`} key={`${artwork.title}-${index}`}>
+        <div className="compact-art-grid">
+          {artworks.slice(0, 6).map((artwork, index) => (
+            <figure key={`${artwork.title}-${index}`}>
               <a href={artwork.href} target="_blank" rel="noreferrer">
-                <Image src={artwork.image} alt={`${artwork.title}, œuvre de Jean-Philippe Lemée, ${artwork.year}`} width={1200} height={900} unoptimized />
+                <Image src={artwork.image} alt={`${artwork.title}, œuvre de Jean-Philippe Lemée, ${artwork.year}`} width={675} height={675} unoptimized />
               </a>
-              <figcaption><span>{artwork.title}</span><span>{artwork.year}</span><span>DDAB Bretagne · © droits réservés ↗</span></figcaption>
+              <figcaption><span>{artwork.title}</span><span>{artwork.year}</span></figcaption>
             </figure>
           ))}
         </div>
-      </section>
-
-      <section className="statement section-pad">
-        <p className="section-index">02 — Une position</p>
-        <p className="statement-lead">Ni peintre solitaire, ni simple collectionneur d’images : <strong>un metteur en scène de tableaux.</strong></p>
-        <div className="statement-columns">
-          <p>Depuis 1989, chaque toile naît d’une recette. L’image source est regardée, redessinée, transmise, agrandie, colorée puis réalisée par un peintre en lettres. L’auteur se déplace : il devient celui qui règle les conditions d’apparition de l’œuvre.</p>
-          <p>Références savantes et culture ordinaire se rencontrent sans hiérarchie : Fra Angelico, Courbet ou Warhol peuvent côtoyer le football, les jeux de société, les objets du quotidien et les dessins anonymes.</p>
-        </div>
+        <Link className="text-link" href="/archives#oeuvres">Voir l’iconographie et les crédits →</Link>
       </section>
 
       <section className="projects section-pad" id="projets">
-        <div className="section-heading"><p className="section-index">03 — Projets</p><h2>Une œuvre<br /><i>en mouvement</i></h2></div>
+        <div className="section-heading"><p className="section-index">02 — Projets</p><h2>Une œuvre<br /><i>en mouvement</i></h2></div>
         <ProjectGrid projects={projects} />
+        <Link className="text-link" href="/projets">Explorer tous les projets →</Link>
       </section>
 
-      <section className="method section-pad" id="methode">
-        <div className="section-heading light"><p className="section-index">02 — La recette</p><h2>Peindre sans<br />peindre seul</h2></div>
-        <ol className="recipe">
-          <li><span>01</span><strong>Choisir</strong><p>Une œuvre ancienne, une image populaire, un jeu ou un détail du quotidien.</p></li>
-          <li><span>02</span><strong>Faire circuler</strong><p>Confier l’image à des inconnus, des élèves ou des amis pour un dessin rapide.</p></li>
-          <li><span>03</span><strong>Composer</strong><p>Sélectionner, agrandir, combiner les dessins et déterminer un code coloré.</p></li>
-          <li><span>04</span><strong>Déléguer</strong><p>Transmettre la réalisation au peintre en lettres et rendre visibles toutes les mains.</p></li>
-        </ol>
-        <blockquote>« L’artiste devient metteur en scène, coordinateur de contributions et d’expériences. »<cite>— d’après Jean-Marc Huitorel</cite></blockquote>
-      </section>
-
-      <section className="places section-pad">
-        <div className="place-map" aria-hidden="true"><span>250+</span><small>communes visitées</small></div>
-        <div className="places-copy">
-          <p className="section-index">03 — Le voyage chez soi</p>
-          <h2>Au coin<br />de la rue</h2>
-          <p>Arpenter Rennes et les villages d’Ille-et-Vilaine comme on visiterait Rome ou New York. Commencer par la place de l’église. Tourner autour. Entrer si la porte est ouverte. Observer la mairie, le café, les maisons — puis ce petit détail que personne ne regarde.</p>
-          <a href="https://www.larchitiste.com/jean-philippe-lemee-chercheur-dart-chitecture-au-coin-de-la-rue" target="_blank" rel="noreferrer">Lire l’entretien dans L’Architiste ↗</a>
+      <section className="statement section-pad">
+        <p className="section-index">03 — Une position</p>
+        <p className="statement-lead">Ni peintre solitaire, ni simple collectionneur d’images : <strong>un metteur en scène de tableaux.</strong></p>
+        <div className="statement-columns">
+          <p>Depuis 1989, chaque toile naît d’une recette. L’image est regardée, redessinée, transmise, agrandie, colorée puis réalisée par un peintre en lettres.</p>
+          <p>Références savantes et culture ordinaire se rencontrent sans hiérarchie : Fra Angelico, Courbet ou Warhol côtoient le football, les jeux et les dessins anonymes.</p>
         </div>
       </section>
 
-      <section className="timeline section-pad" id="parcours">
-        <div className="section-heading"><p className="section-index">04 — Parcours</p><h2>Repères</h2></div>
-        <div className="timeline-list">
-          {timeline.map(([year, text]) => <div className="timeline-row" key={year}><strong>{year}</strong><p>{text}</p></div>)}
-        </div>
-      </section>
-
-      <section className="exhibitions section-pad">
-        <div className="section-heading light"><p className="section-index">05 — Expositions choisies</p><h2>Dans les lieux<br />et les collections</h2></div>
-        <div className="exhibition-grid">
-          {exhibitionHighlights.map(([year, title]) => <article key={`${year}-${title}`}><span>{year}</span><p>{title}</p></article>)}
-        </div>
-        <p className="exhibition-note">Sélection établie d’après la biographie et bibliographie publiée par Documents d’artistes Bretagne.</p>
-      </section>
-
-      <section className="sources section-pad" id="sources">
-        <div><p className="section-index">05 — Documentation</p><h2>Sources<br />& archives</h2></div>
-        <div className="source-list">
-          {sources.map(([label, url], index) => <a href={url} target="_blank" rel="noreferrer" key={url}><span>0{index + 1}</span>{label}<b>↗</b></a>)}
-          <p>Les reproductions d’œuvres seront ajoutées après validation des droits et crédits photographiques. Les contenus biographiques seront relus avec l’artiste avant publication définitive.</p>
-        </div>
+      <section className="portal-grid section-pad">
+        <Link href="/projets"><span>01</span><h2>Projets<br />& méthodes</h2><p>ACSLS, Abécédaire des lieux, Deux par deux, NCDGQAD, Tableaux Faits Main et art-chitecture.</p><b>Entrer →</b></Link>
+        <Link href="/archives"><span>02</span><h2>Archives<br />& sources</h2><p>Œuvres, repères, expositions, bibliographie et corpus documentaire complet.</p><b>Consulter →</b></Link>
       </section>
 
       <footer><p>Jean-Philippe Lemée</p><p>Vit et travaille à Rennes</p><a href="#accueil">Retour en haut ↑</a></footer>
