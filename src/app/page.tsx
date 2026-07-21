@@ -1,35 +1,35 @@
 import Link from "next/link";
-import { Header, ProjectGrid } from "@/components/site-client";
-import { projects, sources } from "@/data/content";
+import { Header } from "@/components/site-client";
 
-const featuredSources = sources.slice(0, 8);
+const paths = [
+  { number: "01", title: "Regarder", text: "Déplacer l’attention vers les formes ordinaires, les lieux proches et ce qui existe déjà.", href: "/projets#regarder" },
+  { number: "02", title: "Fabriquer", text: "Écrire des protocoles, déléguer le geste et mettre les images en conversation.", href: "/projets#fabriquer" },
+  { number: "03", title: "Transmettre", text: "Faire de l’histoire de l’art, du dessin et de l’architecture des expériences collectives.", href: "/projets#transmettre" },
+];
 
 export default function Home() {
   return <main id="top">
     <Header />
-    <section className="home-hero shell">
-      <div className="hero-meta"><span>Artiste · Historien de l’art</span><span>Rennes · depuis 1957</span></div>
-      <h1>Jean-Philippe<br /><em>Lemée</em></h1>
-      <div className="hero-summary"><p>Un site-document pour parcourir une œuvre fondée sur la circulation des images, la délégation et le rôle actif du regardeur.</p><Link href="/archives">Consulter le corpus <span>21 sources →</span></Link></div>
+    <section className="masthead shell">
+      <div className="masthead-index"><span>Artiste & historien de l’art</span><span>Rennes · 1957—</span></div>
+      <h1>Jean-Philippe <em>Lemée</em></h1>
+      <p className="masthead-lead">Des œuvres qui commencent par une règle du jeu et se terminent dans le regard des autres.</p>
+      <div className="masthead-actions"><Link href="/projets">Découvrir les projets <i>→</i></Link><Link href="/archives">Consulter les sources <i>↗</i></Link></div>
+      <div className="masthead-mark" aria-hidden="true"><span>J</span><span>P</span><span>L</span></div>
     </section>
 
-    <section className="overview shell">
-      <div className="section-label"><span>01</span><p>La pratique</p></div>
-      <div className="overview-copy"><p>Depuis 1989, Jean-Philippe Lemée produit des « Tableaux Faits Main » à partir de recettes : une image est confiée à d’autres mains, redessinée, sélectionnée, agrandie puis réalisée par un peintre en lettres.</p><p>Son travail rapproche histoire de l’art, culture ordinaire, jeux, architecture et formes trouvées. L’artiste n’est plus seul auteur : il organise les conditions de l’œuvre.</p></div>
+    <section className="statement shell">
+      <p className="eyebrow">Une pratique de la relation</p>
+      <blockquote>« L’artiste n’est plus le seul auteur. Il organise les conditions pour que l’œuvre advienne. »</blockquote>
+      <div><p>Depuis 1989, Jean-Philippe Lemée compose des recettes : choisir une image, la faire redessiner, sélectionner une interprétation, définir ses couleurs puis confier sa réalisation à un peintre en lettres.</p><p>Cette méthode traverse la peinture, le dessin, l’espace public et l’architecture. Elle transforme l’auteur en passeur et le spectateur en participant.</p></div>
     </section>
 
-    <section className="source-preview shell" id="sources">
-      <div className="section-head"><div className="section-label"><span>02</span><p>Sources principales</p></div><p>Le point d’entrée du site : fonds institutionnels, archives, catalogues et publications.</p></div>
-      <div className="source-cards">{featuredSources.map(([label,url],index) => <a href={url} target="_blank" rel="noreferrer" key={url}><span className="source-number">{String(index+1).padStart(2,"0")}</span><div><b>{label}</b><small>{new URL(url).hostname.replace("www.","")}</small></div><span className="source-arrow">↗</span></a>)}</div>
-      <Link className="inline-link" href="/archives#corpus">Voir les 21 sources et le récapitulatif →</Link>
+    <section className="paths shell">
+      <header><p className="eyebrow">Parcours de lecture</p><h2>Trois manières<br />d’entrer dans l’œuvre</h2></header>
+      <div className="path-list">{paths.map(path => <Link href={path.href} key={path.number}><span>{path.number}</span><div><h3>{path.title}</h3><p>{path.text}</p></div><i>↗</i></Link>)}</div>
     </section>
 
-    <section className="project-preview shell" id="projets">
-      <div className="section-head"><div className="section-label"><span>03</span><p>Six entrées</p></div><p>Des projets reliés à leurs documents de référence.</p></div>
-      <ProjectGrid projects={projects} />
-    </section>
-
-    <section className="route-links shell"><Link href="/projets"><span>Dossiers</span><strong>Projets & méthodes</strong><i>→</i></Link><Link href="/archives"><span>Documentation</span><strong>Archives & parcours</strong><i>→</i></Link></section>
-    <footer className="site-footer shell"><span>Jean-Philippe Lemée</span><span>Site documentaire · 2026</span><a href="#top">Haut de page ↑</a></footer>
+    <aside className="source-callout shell"><div><span>Documentation</span><strong>21</strong><small>ressources en ligne</small></div><p>Notices institutionnelles, catalogues, archives, entretiens et fonds publics sont réunis dans une bibliographie unique.</p><Link href="/archives#corpus">Ouvrir le répertoire <i>→</i></Link></aside>
+    <footer className="site-footer shell"><span>Jean-Philippe Lemée</span><span>Œuvres · méthodes · sources</span><a href="#top">Haut de page ↑</a></footer>
   </main>;
 }
