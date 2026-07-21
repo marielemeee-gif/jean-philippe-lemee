@@ -3,14 +3,20 @@ import Link from "next/link";
 import { Header } from "@/components/site-client";
 import { artworks, exhibitionHighlights, sources, timeline } from "@/data/content";
 
+const selectedImages = [artworks[0], artworks[2], artworks[3]];
+
 export default function ArchivesPage() {
-  return <main className="inner-page archives-page">
+  return <main id="top" className="document-page">
     <Header />
-    <header className="page-hero section-pad"><p className="section-index">Documentation</p><h1>Archives<br /><i>& sources</i></h1><p>Un corpus ouvert : reproductions, chronologie, expositions et liens vers les fonds qui documentent le travail.</p></header>
-    <section className="archive-images section-pad" id="oeuvres"><div className="archive-heading"><p className="section-index">01 — Iconographie</p><p>Images servies depuis Documents d’artistes Bretagne. © Droits réservés.</p></div><div className="archive-thumb-grid">{artworks.map((artwork, index) => <figure key={`${artwork.title}-${index}`}><a href={artwork.href} target="_blank" rel="noreferrer"><Image src={artwork.image} alt={`${artwork.title}, ${artwork.year}`} width={675} height={675} unoptimized /></a><figcaption>{artwork.title}<span>{artwork.year}</span></figcaption></figure>)}</div></section>
-    <section className="timeline section-pad" id="parcours"><div className="section-heading"><p className="section-index">02 — Parcours</p><h2>Repères</h2></div><div className="timeline-list">{timeline.map(([year,text]) => <div className="timeline-row" key={year}><strong>{year}</strong><p>{text}</p></div>)}</div></section>
-    <section className="exhibitions section-pad"><div className="section-heading light"><p className="section-index">03 — Expositions choisies</p><h2>Dans les lieux<br />et les collections</h2></div><div className="exhibition-grid">{exhibitionHighlights.map(([year,title]) => <article key={`${year}-${title}`}><span>{year}</span><p>{title}</p></article>)}</div></section>
-    <section className="sources section-pad" id="sources"><div><p className="section-index">04 — Corpus en ligne</p><h2>Sources<br />retrouvées</h2></div><div className="source-list">{sources.map(([label,url],index) => <a href={url} target="_blank" rel="noreferrer" key={url}><span>{String(index+1).padStart(2,"0")}</span>{label}<b>↗</b></a>)}<p>Inventaire de travail établi à partir de sources institutionnelles, fonds d’archives, catalogues, presse et pages publiques de l’artiste. Les droits restent attachés à chaque source.</p></div></section>
-    <div className="next-page section-pad"><p>Retour à la lecture</p><Link href="/projets">Projets & méthodes →</Link></div>
+    <header className="document-hero shell"><div><span className="kicker">Documentation</span><h1>Archives<br />& sources</h1></div><p>Un récapitulatif raisonné des ressources retrouvées sur Jean-Philippe Lemée. Chaque entrée renvoie directement au document ou à l’organisme producteur.</p></header>
+
+    <section className="corpus shell" id="corpus"><div className="section-head"><div className="section-label"><span>01</span><p>Corpus en ligne</p></div><p>{sources.length} ressources vérifiées · ouverture dans la source d’origine.</p></div><div className="source-table">{sources.map(([label,url],index) => <a href={url} target="_blank" rel="noreferrer" key={url}><span>{String(index+1).padStart(2,"0")}</span><b>{label}</b><small>{new URL(url).hostname.replace("www.","")}</small><i>↗</i></a>)}</div></section>
+
+    <section className="evidence shell"><div className="section-head"><div className="section-label"><span>02</span><p>Repères visuels</p></div><p>Trois aperçus seulement, liés aux dossiers DDAB et affichés à leur taille utile.</p></div><div className="evidence-grid">{selectedImages.map((artwork,index) => <figure key={`${artwork.title}-${index}`}><a href={artwork.href} target="_blank" rel="noreferrer"><Image src={artwork.image} alt={`${artwork.title}, ${artwork.year}`} width={675} height={675} unoptimized /></a><figcaption><b>{artwork.title}</b><span>{artwork.year} · DDAB Bretagne ↗</span></figcaption></figure>)}</div></section>
+
+    <section className="chronology shell" id="parcours"><div className="section-head"><div className="section-label"><span>03</span><p>Chronologie</p></div><p>Repères biographiques et artistiques.</p></div><div className="chronology-list">{timeline.map(([year,text]) => <div key={year}><time>{year}</time><p>{text}</p></div>)}</div></section>
+
+    <section className="shows shell"><div className="section-head"><div className="section-label"><span>04</span><p>Expositions choisies</p></div><p>Sélection issue de la bio-bibliographie DDAB.</p></div><div className="shows-list">{exhibitionHighlights.map(([year,title]) => <div key={`${year}-${title}`}><time>{year}</time><p>{title}</p></div>)}</div></section>
+    <nav className="page-next shell"><Link href="/">← Accueil</Link><Link href="/projets">Projets & méthodes →</Link></nav>
   </main>;
 }
