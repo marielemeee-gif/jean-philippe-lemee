@@ -17,9 +17,12 @@ const groups = [
   { id:"transmettre", title:"Transmettre", ids:["ncdgqad","architecture"] },
 ];
 
+const otherSeries = ["Batailles","Tennis / Parties de Tennis","Dessiner c’est Gagner","Dessine-moi un mouton","Le Mont Saint-Michel appartient à tout le monde","Multiplication","Eh oui ! d’après Villeglé","G2, G. Bush / J. Chirac","Roy, Pablo, Eugène et les Autres","Archanges","Coups de Brosse","Métamorphoses","CHIC Collection","Nos Marilyns","Marine d’après Lorrain","I Love Châteaux / We Love Châteaux","Les Turqueries de Bazouges","Projets de projets"];
+
 export default function ProjectsPage(){return <main id="top" className="document-page"><Header/>
   <header className="page-intro shell"><p className="eyebrow">Les projets</p><h1>Six protocoles,<br /><em>trois gestes</em></h1><p>Un parcours organisé par intention plutôt que par date. Chaque dossier mène à une source de référence ; la bibliographie exhaustive reste réunie dans les archives.</p></header>
   <nav className="chapter-nav shell" aria-label="Chapitres">{groups.map(group=><a href={`#${group.id}`} key={group.id}><span>{group.id === "regarder" ? "01" : group.id === "fabriquer" ? "02" : "03"}</span>{group.title}</a>)}</nav>
   {groups.map((group,groupIndex)=><section className="project-chapter shell" id={group.id} key={group.id}><header><span>0{groupIndex+1}</span><h2>{group.title}</h2></header><div className="project-pair">{group.ids.map(id=>{const project=projects.find(item=>item.id===id)!;const detail=details[id];return <article id={id} key={id}><div className="project-meta"><span>{project.subtitle}</span><span>{project.number} / 06</span></div><h3>{project.title}</h3><p>{detail.summary}</p><a href={detail.url} target="_blank" rel="noreferrer">Lire la source principale <span>{detail.source}</span><i>↗</i></a></article>})}</div></section>)}
-  <nav className="page-next shell"><Link href="/">← Accueil</Link><Link href="/archives">Sources & parcours →</Link></nav>
+  <section className="archive-section shell"><header className="archive-heading"><div><span>04</span><h2>Autres séries documentées</h2></div><p>Ensembles cités dans les catalogues, collections et dossiers institutionnels.</p></header><div className="collection-grid">{otherSeries.map((series,i)=><div key={series}><span>{String(i+1).padStart(2,"0")}</span><p>{series}</p></div>)}</div></section>
+  <nav className="page-next shell"><Link href="/">← Accueil</Link><Link href="/parcours">Parcours complet →</Link></nav>
 </main>}

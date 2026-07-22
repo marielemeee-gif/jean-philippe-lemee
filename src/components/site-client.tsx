@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 
 const navigation = [
   { label: "Œuvres & projets", href: "/projets", note: "6 projets expliqués" },
-  { label: "Biographie", href: "/archives#biographie", note: "Parcours et expositions" },
-  { label: "Sources", href: "/archives#corpus", note: "21 références vérifiées" },
+  { label: "Parcours", href: "/parcours", note: "Bio, expositions, collections" },
+  { label: "Sources", href: "/archives", note: "30 références vérifiées" },
 ];
 
 export function Header() {

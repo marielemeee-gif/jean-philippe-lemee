@@ -3,8 +3,8 @@ import { Header } from "@/components/site-client";
 
 const destinations = [
   { number: "01", title: "Œuvres & projets", text: "Découvrir ACSLS, l’Abécédaire des lieux, Deux par deux, les Tableaux Faits Main, NCDGQAD et Art-chitecture.", href: "/projets", action: "Voir les 6 projets" },
-  { number: "02", title: "Biographie", text: "Suivre le parcours de Jean-Philippe Lemée, de sa formation aux expositions et projets les plus récents.", href: "/archives#biographie", action: "Lire le parcours" },
-  { number: "03", title: "Sources", text: "Accéder directement aux notices institutionnelles, catalogues, archives, entretiens et collections publiques.", href: "/archives#corpus", action: "Consulter les 21 sources" },
+  { number: "02", title: "Parcours complet", text: "Parcourir la biographie, 71 expositions recensées, 16 collections, les éditions, la presse et les médias.", href: "/parcours", action: "Ouvrir l’inventaire" },
+  { number: "03", title: "Sources", text: "Accéder directement aux notices institutionnelles, catalogues, archives, entretiens et collections publiques.", href: "/archives", action: "Consulter les 30 sources" },
 ];
 
 export default function Home() {
@@ -29,7 +29,7 @@ export default function Home() {
       <div className="path-list">{destinations.map(path => <Link href={path.href} key={path.number}><span>{path.number}</span><div><h3>{path.title}</h3><p>{path.text}</p><b>{path.action} <i>→</i></b></div></Link>)}</div>
     </section>
 
-    <aside className="source-callout shell"><div><span>Répertoire documentaire</span><strong>21</strong><small>ressources en ligne</small></div><p>Toutes les références utilisées par le site sont regroupées, nommées et reliées à leur publication d’origine.</p><Link href="/archives#corpus">Voir toutes les sources <i>→</i></Link></aside>
+    <aside className="source-callout shell"><div><span>Répertoire documentaire</span><strong>30</strong><small>ressources en ligne</small></div><p>Toutes les références utilisées par le site sont regroupées, nommées et reliées à leur publication d’origine.</p><Link href="/archives">Voir toutes les sources <i>→</i></Link></aside>
     <footer className="site-footer shell"><span>Jean-Philippe Lemée</span><span>Œuvres · méthodes · sources</span><a href="#top">Haut de page ↑</a></footer>
   </main>;
 }
