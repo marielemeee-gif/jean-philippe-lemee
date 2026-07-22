@@ -11,9 +11,14 @@ const destinations = [
 
 const gallery = [
   { work: artworks[0], width: 640, height: 480 },
+  { work: artworks[1], width: 640, height: 480 },
   { work: artworks[2], width: 415, height: 550 },
   { work: artworks[3], width: 350, height: 263 },
+  { work: artworks[4], width: 350, height: 254 },
   { work: artworks[5], width: 232, height: 350 },
+  { work: artworks[6], width: 256, height: 350 },
+  { work: artworks[7], width: 256, height: 350 },
+  { work: artworks[8], width: 350, height: 250 },
 ];
 
 export default function Home() {
@@ -29,7 +34,7 @@ export default function Home() {
 
     <section className="visual-projects shell">
       <header><p className="eyebrow">Œuvres documentées</p><h2>Voir le travail</h2><Link href="/projets">Tous les projets →</Link></header>
-      <div className="visual-grid">{gallery.map(({work,width,height},index)=><a href={work.href} target="_blank" rel="noreferrer" className={`visual-card visual-card-${index+1}`} key={`${work.title}-${work.year}-${index}`}><div><Image src={work.image} alt={`${work.title}, ${work.year}`} width={width} height={height} unoptimized/></div><p><strong>{work.title}</strong><span>{work.year} · DDAB Bretagne ↗</span></p></a>)}</div>
+      <div className="visual-grid">{gallery.map(({work,width,height},index)=><a href={work.href} target="_blank" rel="noreferrer" className={`visual-card visual-card-${index+1}`} key={`${work.title}-${work.year}-${index}`}><div><Image src={work.image} alt={`${work.title}, ${work.year}`} width={width} height={height} loading="eager" unoptimized/></div><p><strong>{work.title}</strong><span>{work.year} · DDAB Bretagne ↗</span></p></a>)}</div>
     </section>
 
     <section className="statement shell">
