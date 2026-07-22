@@ -20,7 +20,7 @@ export default function Home() {
 
     <section className="statement shell">
       <p className="eyebrow">Une pratique de la relation</p>
-      <blockquote>« L’artiste n’est plus le seul auteur. Il organise les conditions pour que l’œuvre advienne. »</blockquote>
+      <h2>L’artiste n’est plus le seul auteur. Il organise les conditions pour que l’œuvre advienne.</h2>
       <div><p>Depuis 1989, Jean-Philippe Lemée compose des recettes : choisir une image, la faire redessiner, sélectionner une interprétation, définir ses couleurs puis confier sa réalisation à un peintre en lettres.</p><p>Cette méthode traverse la peinture, le dessin, l’espace public et l’architecture. Elle transforme l’auteur en passeur et le spectateur en participant.</p></div>
     </section>
 
