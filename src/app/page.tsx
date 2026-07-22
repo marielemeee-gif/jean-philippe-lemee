@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/site-client";
+import { artworks } from "@/data/content";
 
 const destinations = [
   { number: "01", title: "Œuvres & projets", text: "Découvrir ACSLS, l’Abécédaire des lieux, Deux par deux, les Tableaux Faits Main, NCDGQAD et Art-chitecture.", href: "/projets", action: "Voir les 6 projets" },
@@ -16,6 +18,11 @@ export default function Home() {
       <p className="masthead-lead">Artiste et historien de l’art. Des œuvres qui commencent par une règle du jeu et se terminent dans le regard des autres.</p>
       <div className="masthead-actions"><Link className="primary-action" href="/projets">Explorer les œuvres et projets <i>→</i></Link><Link href="/archives#corpus">Accéder aux sources <i>↗</i></Link></div>
       <div className="masthead-mark" aria-hidden="true"><span>J</span><span>P</span><span>L</span></div>
+    </section>
+
+    <section className="visual-projects shell">
+      <header><p className="eyebrow">Œuvres documentées</p><h2>Voir le travail</h2><Link href="/projets">Tous les projets →</Link></header>
+      <div className="visual-grid">{[artworks[0],artworks[2],artworks[3],artworks[5]].map((work,index)=><a href={work.href} target="_blank" rel="noreferrer" className={`visual-card visual-card-${index+1}`} key={`${work.title}-${work.year}-${index}`}><div><Image src={work.image} alt={`${work.title}, ${work.year}`} width={900} height={900} unoptimized/></div><p><strong>{work.title}</strong><span>{work.year} · DDAB Bretagne ↗</span></p></a>)}</div>
     </section>
 
     <section className="statement shell">
